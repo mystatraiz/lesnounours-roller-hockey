@@ -9,48 +9,39 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --pink:    #ff1f8e;
-      --cyan:    #00e5ff;
-      --lime:    #c8ff00;
-      --dark:    #06060e;
-      --card:    #0e0e1a;
-      --card2:   #12121f;
-      --border:  rgba(255,31,142,.25);
-      --text:    #e8e8f0;
-      --muted:   #8888aa;
+      --pink:  #ff1f8e;
+      --cyan:  #00e5ff;
+      --lime:  #c8ff00;
+      --dark:  #06060e;
+      --card:  #0e0e1a;
+      --card2: #12121f;
+      --border: rgba(255,31,142,.25);
+      --text:  #e8e8f0;
+      --muted: #8888aa;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
 
-    body {
-      background: var(--dark);
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ─── SCROLLBAR ─────────────────────────────────── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
-    /* ─── NAV ───────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: .9rem 2.5rem;
-      background: rgba(6,6,14,.85);
+      padding: 1rem 2.5rem;
+      background: rgba(6,6,14,.88);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
-    .nav-logo img { height: 48px; width: 48px; object-fit: contain; filter: drop-shadow(0 0 8px var(--pink)); }
+    .nav-logo { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
+    .nav-logo img { height: 67px; width: 67px; object-fit: contain; filter: drop-shadow(0 0 10px var(--pink)); }
     .nav-logo span {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: .12em;
+      font-size: 2.1rem; letter-spacing: .12em;
       background: linear-gradient(90deg, var(--pink), var(--cyan));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
@@ -58,28 +49,26 @@
     .nav-links a {
       color: var(--text); text-decoration: none;
       font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-      font-size: 1rem; letter-spacing: .08em; text-transform: uppercase;
+      font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase;
       transition: color .2s;
     }
     .nav-links a:hover { color: var(--cyan); }
     .nav-cta {
       background: var(--pink); color: #fff; border: none; cursor: pointer;
-      padding: .55rem 1.4rem; border-radius: 4px;
+      padding: .65rem 1.6rem; border-radius: 4px;
       font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: .95rem; letter-spacing: .1em; text-transform: uppercase;
+      font-size: 1.05rem; letter-spacing: .1em; text-transform: uppercase;
       box-shadow: 0 0 18px rgba(255,31,142,.5);
-      transition: box-shadow .2s, transform .15s;
-      text-decoration: none;
+      transition: box-shadow .2s, transform .15s; text-decoration: none;
     }
     .nav-cta:hover { box-shadow: 0 0 30px rgba(255,31,142,.8); transform: translateY(-1px); }
 
-    /* ─── HERO ──────────────────────────────────────── */
+    /* ── HERO ────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
-      padding: 7rem 2rem 4rem;
-      text-align: center;
+      padding: 8rem 2rem 5rem; text-align: center;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -95,31 +84,25 @@
       background-size: 60px 60px;
     }
     .hero-logo {
-      width: min(340px, 70vw);
+      width: min(476px, 70vw);
       filter: drop-shadow(0 0 40px rgba(255,31,142,.6)) drop-shadow(0 0 80px rgba(0,229,255,.3));
       animation: float 4s ease-in-out infinite;
       position: relative; z-index: 1;
     }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
     .hero-tag {
       margin-top: 2rem; position: relative; z-index: 1;
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 1.05rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--cyan);
-      text-shadow: 0 0 20px rgba(0,229,255,.7);
+      color: var(--cyan); text-shadow: 0 0 20px rgba(0,229,255,.7);
     }
     .hero-title {
       position: relative; z-index: 1;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.5rem, 10vw, 7rem);
-      line-height: 1;
-      letter-spacing: .06em;
+      font-size: clamp(3.5rem, 10vw, 7rem); line-height: 1; letter-spacing: .06em;
     }
     .hero-title .we { color: var(--lime); text-shadow: 0 0 30px rgba(200,255,0,.6); }
-    .hero-title .are { color: var(--text); }
     .hero-title .nounours {
       background: linear-gradient(90deg, var(--pink) 0%, var(--cyan) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -127,33 +110,12 @@
     }
     .hero-sub {
       position: relative; z-index: 1;
-      margin-top: 1.5rem;
-      font-size: 1.2rem; color: var(--muted); max-width: 560px;
+      margin-top: 1.5rem; font-size: 1.2rem; color: var(--muted); max-width: 560px;
     }
     .hero-sub strong { color: var(--text); }
     .hero-buttons {
       margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
       justify-content: center; position: relative; z-index: 1;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--pink), #c4006e);
-      color: #fff; border: none; cursor: pointer;
-      padding: .85rem 2.2rem; border-radius: 5px;
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .12em;
-      box-shadow: 0 0 30px rgba(255,31,142,.5);
-      transition: box-shadow .2s, transform .15s; text-decoration: none;
-    }
-    .btn-primary:hover { box-shadow: 0 0 50px rgba(255,31,142,.8); transform: translateY(-2px); }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--cyan); color: var(--cyan);
-      cursor: pointer; padding: .85rem 2.2rem; border-radius: 5px;
-      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .12em;
-      box-shadow: 0 0 20px rgba(0,229,255,.2);
-      transition: box-shadow .2s, background .2s, color .2s; text-decoration: none;
-    }
-    .btn-outline:hover {
-      background: rgba(0,229,255,.1); box-shadow: 0 0 35px rgba(0,229,255,.45);
     }
     .hero-scroll {
       position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
@@ -164,7 +126,35 @@
     .hero-scroll svg { width: 20px; opacity: .6; }
     @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
-    /* ─── SECTION WRAPPER ───────────────────────────── */
+    /* ── BUTTONS ─────────────────────────────────────── */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), #c4006e);
+      color: #fff; border: none; cursor: pointer;
+      padding: .85rem 2.2rem; border-radius: 5px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .12em;
+      box-shadow: 0 0 30px rgba(255,31,142,.5);
+      transition: box-shadow .2s, transform .15s; text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { box-shadow: 0 0 50px rgba(255,31,142,.8); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; border: 2px solid var(--cyan); color: var(--cyan);
+      cursor: pointer; padding: .85rem 2.2rem; border-radius: 5px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .12em;
+      box-shadow: 0 0 20px rgba(0,229,255,.2);
+      transition: box-shadow .2s, background .2s, color .2s; text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(0,229,255,.1); box-shadow: 0 0 35px rgba(0,229,255,.45); }
+    .btn-lime {
+      background: linear-gradient(135deg, var(--lime), #88cc00);
+      color: #0a0a0a; border: none; cursor: pointer;
+      padding: .85rem 2.2rem; border-radius: 5px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .12em;
+      box-shadow: 0 0 25px rgba(200,255,0,.4);
+      transition: box-shadow .2s, transform .15s; text-decoration: none; display: inline-block;
+    }
+    .btn-lime:hover { box-shadow: 0 0 40px rgba(200,255,0,.7); transform: translateY(-2px); }
+
+    /* ── SECTION ─────────────────────────────────────── */
     section { padding: 6rem 2rem; }
     .container { max-width: 1200px; margin: 0 auto; }
     .section-label {
@@ -176,22 +166,17 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(2.5rem, 5vw, 3.8rem); letter-spacing: .06em; line-height: 1;
     }
-    .section-title .accent-cyan  { color: var(--cyan);  text-shadow: 0 0 20px rgba(0,229,255,.5); }
-    .section-title .accent-pink  { color: var(--pink);  text-shadow: 0 0 20px rgba(255,31,142,.5); }
-    .section-title .accent-lime  { color: var(--lime);  text-shadow: 0 0 20px rgba(200,255,0,.5); }
+    .section-title .accent-cyan { color: var(--cyan); text-shadow: 0 0 20px rgba(0,229,255,.5); }
+    .section-title .accent-pink { color: var(--pink); text-shadow: 0 0 20px rgba(255,31,142,.5); }
+    .section-title .accent-lime { color: var(--lime); text-shadow: 0 0 20px rgba(200,255,0,.5); }
     .section-desc { margin-top: 1rem; color: var(--muted); max-width: 580px; line-height: 1.7; }
-    .divider {
-      width: 60px; height: 3px; margin: 1.2rem 0;
-      background: linear-gradient(90deg, var(--pink), var(--cyan));
-      border-radius: 2px;
-    }
+    .divider { width: 60px; height: 3px; margin: 1.2rem 0; background: linear-gradient(90deg, var(--pink), var(--cyan)); border-radius: 2px; }
 
-    /* ─── STATS STRIP ───────────────────────────────── */
+    /* ── STATS ───────────────────────────────────────── */
     #stats {
       padding: 3rem 2rem;
       background: linear-gradient(135deg, rgba(255,31,142,.08), rgba(0,229,255,.06));
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .stats-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -207,19 +192,63 @@
     }
     .stat-label {
       font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      font-size: .9rem; letter-spacing: .15em; text-transform: uppercase;
-      color: var(--muted);
+      font-size: .9rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
     }
 
-    /* ─── VALEURS ───────────────────────────────────── */
-    #valeurs { background: var(--dark); }
+    /* ── TAB SWITCHER ────────────────────────────────── */
+    #tab-switcher {
+      padding: 2.5rem 2rem;
+      background: var(--dark);
+      position: sticky; top: 89px; z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .tab-pills {
+      display: flex; gap: 1rem; max-width: 700px; margin: 0 auto;
+      background: var(--card); border-radius: 14px; padding: .5rem;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .tab-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: 1rem 1.5rem; border-radius: 10px; border: none; cursor: pointer;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .1em;
+      background: transparent; color: var(--muted);
+      transition: background .25s, color .25s, box-shadow .25s;
+    }
+    .tab-btn .tab-icon { font-size: 1.5rem; }
+    .tab-btn .tab-sub {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: inherit; opacity: .7; margin-top: -.2rem;
+    }
+    .tab-btn-inner { display: flex; flex-direction: column; align-items: center; }
+    .tab-btn.active-hockey {
+      background: linear-gradient(135deg, rgba(255,31,142,.2), rgba(255,31,142,.08));
+      color: var(--pink);
+      box-shadow: 0 0 25px rgba(255,31,142,.2), inset 0 0 0 1px rgba(255,31,142,.3);
+    }
+    .tab-btn.active-patinage {
+      background: linear-gradient(135deg, rgba(0,229,255,.2), rgba(0,229,255,.08));
+      color: var(--cyan);
+      box-shadow: 0 0 25px rgba(0,229,255,.2), inset 0 0 0 1px rgba(0,229,255,.3);
+    }
+    .tab-badge {
+      display: inline-block; background: var(--pink); color: #fff;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; font-weight: 900;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .1rem .45rem; border-radius: 50px; margin-left: .3rem; vertical-align: middle;
+    }
+
+    /* ── TAB PANELS ──────────────────────────────────── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── VALEURS ─────────────────────────────────────── */
     .valeurs-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem; margin-top: 3rem;
     }
     .valeur-card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.06);
+      background: var(--card); border: 1px solid rgba(255,255,255,.06);
       border-radius: 12px; padding: 2rem;
       position: relative; overflow: hidden;
       transition: transform .25s, border-color .25s;
@@ -231,19 +260,9 @@
     }
     .valeur-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,.15); }
     .valeur-card:hover::before { opacity: .04; }
-    .valeur-icon {
-      font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1;
-      display: inline-block;
-    }
-    .valeur-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem; letter-spacing: .08em;
-      position: relative; z-index: 1;
-    }
-    .valeur-desc {
-      margin-top: .5rem; color: var(--muted); line-height: 1.65; font-size: .95rem;
-      position: relative; z-index: 1;
-    }
+    .valeur-icon { font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1; display: inline-block; }
+    .valeur-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: .08em; position: relative; z-index: 1; }
+    .valeur-desc { margin-top: .5rem; color: var(--muted); line-height: 1.65; font-size: .95rem; position: relative; z-index: 1; }
     .valeur-card[data-color="pink"] { --color-a: rgba(255,31,142,.15); --color-b: transparent; }
     .valeur-card[data-color="cyan"] { --color-a: rgba(0,229,255,.15); --color-b: transparent; }
     .valeur-card[data-color="lime"] { --color-a: rgba(200,255,0,.15); --color-b: transparent; }
@@ -254,12 +273,9 @@
     .valeur-card[data-color="cyan"] .valeur-icon { filter: drop-shadow(0 0 8px var(--cyan)); }
     .valeur-card[data-color="lime"] .valeur-icon { filter: drop-shadow(0 0 8px var(--lime)); }
 
-    /* ─── REJOINDRE ─────────────────────────────────── */
-    #rejoindre {
-      background: var(--card2);
-      position: relative; overflow: hidden;
-    }
-    #rejoindre::before {
+    /* ── REJOINDRE ───────────────────────────────────── */
+    .rejoindre-section { background: var(--card2); position: relative; overflow: hidden; }
+    .rejoindre-section::before {
       content: ''; position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 60% 80% at 100% 50%, rgba(200,255,0,.06), transparent 60%),
@@ -281,50 +297,57 @@
     .feature-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:.05em; text-transform:uppercase; }
     .feature-text { color: var(--muted); font-size:.9rem; line-height:1.5; margin-top:.15rem; }
 
-    .rejoindre-cta-box {
-      background: var(--card);
-      border: 1px solid rgba(200,255,0,.2);
-      border-radius: 16px; padding: 2.5rem;
-      text-align: center;
-      box-shadow: 0 0 60px rgba(200,255,0,.06);
+    .cta-box {
+      border-radius: 16px; padding: 2.5rem; text-align: center;
     }
+    .cta-box-hockey { background: var(--card); border: 1px solid rgba(200,255,0,.2); box-shadow: 0 0 60px rgba(200,255,0,.06); }
+    .cta-box-patinage { background: var(--card); border: 1px solid rgba(0,229,255,.2); box-shadow: 0 0 60px rgba(0,229,255,.06); }
     .cta-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--lime), #88cc00);
-      color: #0a0a0a; font-family:'Bebas Neue',sans-serif;
-      font-size: 1.1rem; letter-spacing: .1em; padding: .35rem 1.2rem;
-      border-radius: 50px; margin-bottom: 1.5rem;
+      display: inline-block; border-radius: 50px; margin-bottom: 1.5rem;
+      font-family:'Bebas Neue',sans-serif; font-size: 1.1rem; letter-spacing: .1em; padding: .35rem 1.2rem;
     }
+    .cta-badge-lime { background: linear-gradient(135deg, var(--lime), #88cc00); color: #0a0a0a; }
+    .cta-badge-cyan { background: linear-gradient(135deg, var(--cyan), #0099bb); color: #0a0a0a; }
     .cta-big {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(2rem, 4vw, 3rem); letter-spacing: .06em; line-height: 1.1;
-      color: var(--lime); text-shadow: 0 0 25px rgba(200,255,0,.5);
     }
-    .cta-details {
-      margin-top: 1rem; color: var(--muted); font-size: .95rem; line-height: 1.6;
+    .cta-big-lime { color: var(--lime); text-shadow: 0 0 25px rgba(200,255,0,.5); }
+    .cta-big-cyan { color: var(--cyan); text-shadow: 0 0 25px rgba(0,229,255,.5); }
+    .cta-details { margin-top: 1rem; color: var(--muted); font-size: .95rem; line-height: 1.6; }
+    .cta-tags { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.2rem; }
+    .tag { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 50px; padding: .3rem .9rem; font-size: .8rem; color: var(--text); letter-spacing: .08em; }
+    .cta-location {
+      margin-top: 2rem; border-radius: 10px; padding: 1rem 1.5rem;
     }
-    .cta-tags {
-      display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
-      margin-top: 1.2rem;
-    }
-    .tag {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-      border-radius: 50px; padding: .3rem .9rem;
-      font-size: .8rem; color: var(--text); letter-spacing: .08em;
-    }
-    .cta-free {
-      margin-top: 2rem;
-      background: rgba(200,255,0,.08); border: 1px solid rgba(200,255,0,.25);
-      border-radius: 10px; padding: 1rem 1.5rem;
-    }
-    .cta-free-label {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:1rem; letter-spacing:.15em; text-transform:uppercase;
-      color: var(--lime);
-    }
-    .cta-free-text { font-size:.9rem; color:var(--muted); margin-top:.2rem; }
+    .cta-location-lime { background: rgba(200,255,0,.08); border: 1px solid rgba(200,255,0,.25); }
+    .cta-location-cyan { background: rgba(0,229,255,.08); border: 1px solid rgba(0,229,255,.25); }
+    .cta-location-label { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1rem; letter-spacing:.15em; text-transform:uppercase; }
+    .cta-location-label-lime { color: var(--lime); }
+    .cta-location-label-cyan { color: var(--cyan); }
+    .cta-location-text { font-size:.9rem; color:var(--muted); margin-top:.2rem; }
 
-    /* ─── DONNÉES / CHARTS ──────────────────────────── */
+    /* ── PATINAGE FEATURES ───────────────────────────── */
+    .patinage-hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .patinage-steps { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+    .step-card {
+      background: var(--card); border: 1px solid rgba(0,229,255,.12);
+      border-radius: 12px; padding: 1.5rem; text-align: center;
+      transition: transform .2s, border-color .2s;
+    }
+    .step-card:hover { transform: translateY(-4px); border-color: rgba(0,229,255,.3); box-shadow: 0 0 25px rgba(0,229,255,.08); }
+    .step-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem;
+      color: var(--cyan); opacity: .25; line-height: 1; margin-bottom: .5rem;
+    }
+    .step-icon { font-size: 2rem; margin-bottom: .6rem; filter: drop-shadow(0 0 6px var(--cyan)); }
+    .step-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.1em; text-transform:uppercase; color: var(--cyan); }
+    .step-text { color: var(--muted); font-size: .88rem; line-height: 1.5; margin-top: .4rem; }
+
+    /* ── DONNÉES ─────────────────────────────────────── */
     #donnees { background: var(--dark); }
     .charts-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -335,75 +358,51 @@
       border-radius: 14px; padding: 1.8rem;
       transition: border-color .25s, box-shadow .25s;
     }
-    .chart-card:hover {
-      border-color: rgba(0,229,255,.25);
-      box-shadow: 0 0 40px rgba(0,229,255,.06);
-    }
+    .chart-card:hover { border-color: rgba(0,229,255,.25); box-shadow: 0 0 40px rgba(0,229,255,.06); }
     .chart-title {
       font-family:'Barlow Condensed',sans-serif; font-weight:700;
       font-size:1rem; letter-spacing:.15em; text-transform:uppercase;
       color: var(--cyan); margin-bottom: 1.2rem;
     }
     .chart-canvas { max-height: 260px; }
-
-    .licences-table {
-      width: 100%; border-collapse: collapse; margin-top: .5rem;
-      font-size: .88rem;
-    }
+    .licences-table { width: 100%; border-collapse: collapse; margin-top: .5rem; font-size: .88rem; }
     .licences-table th {
       text-align: left; padding: .6rem .8rem;
       font-family:'Barlow Condensed',sans-serif; font-weight:700;
       font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
       color: var(--muted); border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .licences-table td {
-      padding: .65rem .8rem; border-bottom: 1px solid rgba(255,255,255,.04);
-      color: var(--text);
-    }
+    .licences-table td { padding: .65rem .8rem; border-bottom: 1px solid rgba(255,255,255,.04); color: var(--text); }
     .licences-table tr:last-child td { border-bottom: none; font-weight:600; color:var(--cyan); }
     .licences-table td:not(:first-child) { text-align: right; }
     .badge-num {
       display: inline-block; min-width: 32px;
       background: rgba(255,31,142,.15); border-radius: 4px;
       padding: .1rem .4rem; text-align:center;
-      font-family:'Barlow Condensed',sans-serif; font-weight:700;
-      color: var(--pink);
+      font-family:'Barlow Condensed',sans-serif; font-weight:700; color: var(--pink);
     }
 
-    /* ─── INFOS PRATIQUES ───────────────────────────── */
-    #infos {
-      background: var(--card2);
-      position: relative; overflow: hidden;
-    }
+    /* ── INFOS ───────────────────────────────────────── */
+    #infos { background: var(--card2); position: relative; overflow: hidden; }
     #infos::before {
       content:''; position:absolute; inset:0;
       background: radial-gradient(ellipse 50% 70% at 50% 100%, rgba(255,31,142,.07), transparent 60%);
     }
-    .infos-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem; margin-top: 3rem; position: relative; z-index: 1;
-    }
+    .infos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; position: relative; z-index: 1; }
     .info-card {
       background: var(--card); border: 1px solid rgba(255,255,255,.06);
       border-radius: 14px; padding: 1.8rem;
       transition: transform .2s, border-color .2s;
     }
     .info-card:hover { transform: translateY(-3px); border-color: rgba(255,31,142,.2); }
-    .info-card-icon {
-      font-size: 2rem; margin-bottom: 1rem;
-      filter: drop-shadow(0 0 8px var(--pink));
-    }
-    .info-card-title {
-      font-family:'Barlow Condensed',sans-serif; font-weight:700;
-      font-size:1.05rem; letter-spacing:.1em; text-transform:uppercase;
-      color: var(--pink); margin-bottom: .6rem;
-    }
+    .info-card-icon { font-size: 2rem; margin-bottom: 1rem; filter: drop-shadow(0 0 8px var(--pink)); }
+    .info-card-title { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:.1em; text-transform:uppercase; color: var(--pink); margin-bottom: .6rem; }
     .info-card-text { color: var(--muted); line-height:1.65; font-size:.92rem; }
     .info-card-text strong { color: var(--text); }
     .info-card-text a { color: var(--cyan); text-decoration: none; }
     .info-card-text a:hover { text-decoration: underline; }
 
-    /* ─── SOCIAL ────────────────────────────────────── */
+    /* ── SOCIAL ──────────────────────────────────────── */
     #social { background: var(--dark); text-align: center; }
     .social-links { display: flex; gap: 1.2rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
     .social-link {
@@ -419,13 +418,18 @@
     .social-link:hover { transform: translateY(-3px); }
     .social-link.fb:hover { border-color: #1877f2; box-shadow: 0 0 25px rgba(24,119,242,.3); }
     .social-link.ig:hover { border-color: var(--pink); box-shadow: 0 0 25px rgba(255,31,142,.3); }
-    .social-link.web:hover { border-color: var(--lime); box-shadow: 0 0 25px rgba(200,255,0,.3); }
 
-    /* ─── FOOTER ────────────────────────────────────── */
-    footer {
-      background: #040409; border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem; text-align: center;
+    /* ── NEON CARD ───────────────────────────────────── */
+    .neon-card { position: relative; background: var(--card); border-radius: 14px; padding: 2rem; }
+    .neon-card::after {
+      content: ''; position: absolute; inset: -1px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--pink), var(--cyan), var(--lime), var(--pink));
+      background-size: 300% 300%; animation: gradientShift 4s ease infinite; z-index: -1; opacity: .6;
     }
+    @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer { background: #040409; border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; }
     .footer-logo { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-bottom: 1rem; }
     .footer-logo img { height: 40px; filter: drop-shadow(0 0 6px var(--pink)); }
     .footer-logo span {
@@ -436,34 +440,10 @@
     .footer-text { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .footer-text a { color: var(--cyan); text-decoration: none; }
 
-    /* ─── NEON BORDER ANIM ──────────────────────────── */
-    .neon-card {
-      position: relative;
-      background: var(--card);
-      border-radius: 14px;
-      padding: 2rem;
-    }
-    .neon-card::after {
-      content: '';
-      position: absolute; inset: -1px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--pink), var(--cyan), var(--lime), var(--pink));
-      background-size: 300% 300%;
-      animation: gradientShift 4s ease infinite;
-      z-index: -1;
-      opacity: .6;
-    }
-    @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ─── RESPONSIVE ────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: .8rem 1.2rem; }
       .nav-links { display: none; }
-      .rejoindre-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .rejoindre-inner, .patinage-hero { grid-template-columns: 1fr; gap: 2.5rem; }
       .charts-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -477,48 +457,40 @@
     <span>Les Nounours</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#valeurs">Le Club</a></li>
-    <li><a href="#rejoindre">Rejoindre</a></li>
+    <li><a href="#tab-switcher">🏒 Roller Hockey</a></li>
+    <li><a href="#tab-switcher" onclick="switchTab('patinage')">⛸ Patinage</a></li>
     <li><a href="#donnees">Stats</a></li>
     <li><a href="#infos">Infos</a></li>
     <li><a href="#social">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="#rejoindre">Nous rejoindre</a>
+  <a class="nav-cta" href="#tab-switcher">Nous rejoindre</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-
   <img class="hero-logo" src="Logo.jpg" alt="Les Nounours Roller Hockey">
-
-  <p class="hero-tag">Roller Hockey · Nice · Patinoire Tony Bessi</p>
-
+  <p class="hero-tag">Roller Hockey · Patinage · Nice · Patinoire Tony Bessi</p>
   <h1 class="hero-title">
     <span class="we">We Are</span><br>
     <span class="nounours">Nounours</span>
   </h1>
-
   <p class="hero-sub">
-    Le club de roller hockey de Nice qui joue <strong>avec le cœur</strong>.<br>
-    Rejoins une équipe passionnée, une vraie famille.
+    Le club roller de Nice qui joue <strong>avec le cœur</strong>.<br>
+    Hockey, patinage, une vraie famille.
   </p>
-
   <div class="hero-buttons">
-    <a class="btn-primary" href="#rejoindre">Rejoins la meute ⚡</a>
-    <a class="btn-outline" href="#valeurs">Découvrir le club</a>
+    <a class="btn-primary" href="#tab-switcher">🏒 Roller Hockey</a>
+    <a class="btn-outline" href="#tab-switcher" onclick="switchTab('patinage')">⛸ Patinage</a>
   </div>
-
   <div class="hero-scroll">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     Scroll
   </div>
 </section>
 
-<!-- STATS STRIP -->
+<!-- STATS -->
 <div id="stats">
   <div class="container">
     <div class="stats-grid">
@@ -540,306 +512,403 @@
       </div>
       <div class="stat-item">
         <span class="stat-number">5–60</span>
-        <span class="stat-label">Ans de 5 à 60 ans</span>
+        <span class="stat-label">Ans – tous les âges</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- VALEURS -->
-<section id="valeurs">
-  <div class="container">
-    <p class="section-label">Notre identité</p>
-    <h2 class="section-title">Les valeurs <span class="accent-pink">Nounours</span></h2>
-    <div class="divider"></div>
-    <p class="section-desc">Plus qu'un club, une famille. Les Nounours c'est une communauté soudée qui partage passion, respect et dépassement de soi sur chaque coup de patin.</p>
-
-    <div class="valeurs-grid">
-      <div class="valeur-card" data-color="pink">
-        <span class="valeur-icon">❤️</span>
-        <div class="valeur-name">Respect</div>
-        <p class="valeur-desc">On joue avec le cœur. Sur la piste comme en dehors, le respect de l'adversaire, des arbitres et de ses coéquipiers est notre première règle.</p>
-      </div>
-      <div class="valeur-card" data-color="lime">
-        <span class="valeur-icon">⚡</span>
-        <div class="valeur-name">Performance</div>
-        <p class="valeur-desc">On se dépasse ensemble. L'émulation du groupe pousse chaque joueur à donner le meilleur de lui-même, à chaque entraînement, chaque match.</p>
-      </div>
-      <div class="valeur-card" data-color="cyan">
-        <span class="valeur-icon">🤝</span>
-        <div class="valeur-name">Amitié</div>
-        <p class="valeur-desc">Plus qu'une équipe, une famille. Les liens qui se créent ici dépassent largement la patinoire. Bienvenue chez les Nounours.</p>
-      </div>
-      <div class="valeur-card" data-color="pink">
-        <span class="valeur-icon">👨‍👩‍👧‍👦</span>
-        <div class="valeur-name">Famille</div>
-        <p class="valeur-desc">Un club proche des familles. Parents, enfants, adultes — tout le monde a sa place. On grandit ensemble, on célèbre ensemble.</p>
-      </div>
-      <div class="valeur-card" data-color="lime">
-        <span class="valeur-icon">🏆</span>
-        <div class="valeur-name">Compétition</div>
-        <p class="valeur-desc">Des défis, des émotions. On dispute des championnats et tournois régionaux et nationaux avec une ambition toujours croissante.</p>
-      </div>
-      <div class="valeur-card" data-color="cyan">
-        <span class="valeur-icon">🎯</span>
-        <div class="valeur-name">Inclusion</div>
-        <p class="valeur-desc">Fille ou garçon, débutant ou confirmé, de 5 à 60 ans. Le roller hockey est ouvert à tous et nos portes le sont aussi.</p>
-      </div>
-    </div>
+<!-- TAB SWITCHER -->
+<div id="tab-switcher">
+  <div class="tab-pills">
+    <button class="tab-btn active-hockey" id="btn-hockey" onclick="switchTab('hockey')">
+      <span class="tab-icon">🏒</span>
+      <span class="tab-btn-inner">
+        <span>Roller Hockey <span class="tab-badge">PRINCIPAL</span></span>
+        <span class="tab-sub">Compétition & loisir</span>
+      </span>
+    </button>
+    <button class="tab-btn" id="btn-patinage" onclick="switchTab('patinage')">
+      <span class="tab-icon">⛸</span>
+      <span class="tab-btn-inner">
+        <span>Roller & Patinage</span>
+        <span class="tab-sub">Apprentissage & initiation</span>
+      </span>
+    </button>
   </div>
-</section>
+</div>
 
-<!-- REJOINDRE -->
-<section id="rejoindre">
-  <div class="container">
-    <div class="rejoindre-inner">
-      <!-- LEFT -->
-      <div>
-        <p class="section-label">Viens essayer</p>
-        <h2 class="section-title">Rejoins<br><span class="accent-lime">La Meute !</span></h2>
-        <div class="divider"></div>
-        <p class="section-desc">Que tu aies 5 ou 60 ans, que tu sois débutant ou expérimenté, il y a une place pour toi chez les Nounours.</p>
+<!-- ═══════════════════════════════════════════════ -->
+<!--  TAB 1 : ROLLER HOCKEY                         -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="hockey" class="tab-panel active">
 
-        <div class="rejoindre-features">
-          <div class="feature-row" style="--color: var(--pink)">
-            <span class="feature-icon">🛼</span>
-            <div>
-              <div class="feature-title">Équipements prêtés</div>
-              <div class="feature-text">Pour débuter en toute sérénité. Casque, protections, patins — on a tout ce qu'il faut pour tes premières séances.</div>
-            </div>
-          </div>
-          <div class="feature-row" style="--color: var(--cyan)">
-            <span class="feature-icon">😄</span>
-            <div>
-              <div class="feature-title">Entraînements ludiques</div>
-              <div class="feature-text">Progresser en s'amusant. Nos coachs adaptent les exercices à chaque niveau pour une progression rapide et fun.</div>
-            </div>
-          </div>
-          <div class="feature-row" style="--color: var(--lime)">
-            <span class="feature-icon">🏅</span>
-            <div>
-              <div class="feature-title">Compétitions & tournois</div>
-              <div class="feature-text">Des défis, des émotions ! Championnats régionaux, tournois nationaux — l'adrénaline de la compétition t'attend.</div>
-            </div>
-          </div>
-          <div class="feature-row" style="--color: var(--pink)">
-            <span class="feature-icon">🐻</span>
-            <div>
-              <div class="feature-title">Humains avant tout</div>
-              <div class="feature-text">Un club proche des familles. Ambiance chaleureuse et bienveillante garantie à chaque séance.</div>
-            </div>
-          </div>
+  <!-- VALEURS -->
+  <section style="background:var(--dark)">
+    <div class="container">
+      <p class="section-label">Notre identité</p>
+      <h2 class="section-title">Les valeurs <span class="accent-pink">Nounours</span></h2>
+      <div class="divider"></div>
+      <p class="section-desc">Plus qu'un club, une famille. Les Nounours c'est une communauté soudée qui partage passion, respect et dépassement de soi sur chaque coup de crosse.</p>
+      <div class="valeurs-grid">
+        <div class="valeur-card" data-color="pink">
+          <span class="valeur-icon">❤️</span>
+          <div class="valeur-name">Respect</div>
+          <p class="valeur-desc">On joue avec le cœur. Sur la piste comme en dehors, le respect de l'adversaire, des arbitres et de ses coéquipiers est notre première règle.</p>
         </div>
-      </div>
-
-      <!-- RIGHT -->
-      <div>
-        <div class="neon-card">
-          <div class="cta-badge">⭐ OFFRE DÉCOUVERTE</div>
-          <div class="cta-big">1 à 2 Séances<br>Découvertes<br>Offertes !</div>
-          <p class="cta-details">Viens tester le roller hockey sans engagement. Une ou deux séances gratuites pour tomber amoureux du sport le plus électrique de Nice.</p>
-          <div class="cta-tags">
-            <span class="tag">Fille ou Garçon</span>
-            <span class="tag">5 à 17 ans</span>
-            <span class="tag">Tous niveaux</span>
-            <span class="tag">Adultes aussi</span>
-          </div>
-          <div class="cta-free">
-            <div class="cta-free-label">📍 Où nous trouver ?</div>
-            <div class="cta-free-text"><strong style="color:var(--text)">Patinoire Tony Bessi</strong> · Nice<br>Retrouve nous sur les réseaux pour les horaires d'entraînement</div>
-          </div>
-          <div style="margin-top:1.8rem; display:flex; gap:.8rem; flex-wrap:wrap;">
-            <a class="btn-primary" href="#social" style="flex:1;text-align:center;">Nous contacter ⚡</a>
-          </div>
+        <div class="valeur-card" data-color="lime">
+          <span class="valeur-icon">⚡</span>
+          <div class="valeur-name">Performance</div>
+          <p class="valeur-desc">On se dépasse ensemble. L'émulation du groupe pousse chaque joueur à donner le meilleur de lui-même, à chaque entraînement, chaque match.</p>
+        </div>
+        <div class="valeur-card" data-color="cyan">
+          <span class="valeur-icon">🤝</span>
+          <div class="valeur-name">Amitié</div>
+          <p class="valeur-desc">Plus qu'une équipe, une famille. Les liens qui se créent ici dépassent largement la patinoire. Bienvenue chez les Nounours.</p>
+        </div>
+        <div class="valeur-card" data-color="pink">
+          <span class="valeur-icon">👨‍👩‍👧‍👦</span>
+          <div class="valeur-name">Famille</div>
+          <p class="valeur-desc">Un club proche des familles. Parents, enfants, adultes — tout le monde a sa place. On grandit ensemble, on célèbre ensemble.</p>
+        </div>
+        <div class="valeur-card" data-color="lime">
+          <span class="valeur-icon">🏆</span>
+          <div class="valeur-name">Compétition</div>
+          <p class="valeur-desc">Des défis, des émotions. On dispute des championnats et tournois régionaux et nationaux avec une ambition toujours croissante.</p>
+        </div>
+        <div class="valeur-card" data-color="cyan">
+          <span class="valeur-icon">🎯</span>
+          <div class="valeur-name">Inclusion</div>
+          <p class="valeur-desc">Fille ou garçon, débutant ou confirmé, de 5 à 60 ans. Le roller hockey est ouvert à tous et nos portes le sont aussi.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- DONNÉES -->
-<section id="donnees">
-  <div class="container">
-    <p class="section-label">Le club en chiffres</p>
-    <h2 class="section-title">Notre <span class="accent-cyan">croissance</span></h2>
-    <div class="divider"></div>
-    <p class="section-desc">Depuis 2017, les Nounours n'ont cessé de grandir. Aujourd'hui avec 112 licenciés, on est la grande famille du roller hockey niçois.</p>
-
-    <div class="charts-grid">
-
-      <!-- Chart 1 : Évolution licenciés -->
-      <div class="chart-card" style="grid-column: span 2;">
-        <div class="chart-title">📈 Évolution du nombre de licenciés (2017–2026)</div>
-        <canvas id="chartLicencies" class="chart-canvas" style="max-height:300px"></canvas>
-      </div>
-
-      <!-- Chart 2 : Répartition licences -->
-      <div class="chart-card">
-        <div class="chart-title">🥇 Répartition par type de licence</div>
-        <canvas id="chartTypes" class="chart-canvas"></canvas>
-      </div>
-
-      <!-- Table licences -->
-      <div class="chart-card">
-        <div class="chart-title">📋 Détail des licences – Saison 2025/2026</div>
-        <table class="licences-table">
-          <thead>
-            <tr>
-              <th>Type</th>
-              <th>&lt;6 ans</th>
-              <th>6–12 ans</th>
-              <th>13 ans+</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Compétition</td>
-              <td>–</td>
-              <td><span class="badge-num">5</span></td>
-              <td><span class="badge-num">57</span></td>
-              <td><strong>62</strong></td>
-            </tr>
-            <tr>
-              <td>Loisir</td>
-              <td><span class="badge-num">1</span></td>
-              <td><span class="badge-num">24</span></td>
-              <td><span class="badge-num">7</span></td>
-              <td><strong>32</strong></td>
-            </tr>
-            <tr>
-              <td>Dirigeant</td>
-              <td>–</td>
-              <td>–</td>
-              <td><span class="badge-num">8</span></td>
-              <td><strong>8</strong></td>
-            </tr>
-            <tr>
-              <td>Officiel de compétition</td>
-              <td>–</td>
-              <td>–</td>
-              <td><span class="badge-num">6</span></td>
-              <td><strong>6</strong></td>
-            </tr>
-            <tr>
-              <td>Non Pratiquant</td>
-              <td>–</td>
-              <td>–</td>
-              <td><span class="badge-num">3</span></td>
-              <td><strong>3</strong></td>
-            </tr>
-            <tr>
-              <td>Encadrant sportif</td>
-              <td>–</td>
-              <td>–</td>
-              <td><span class="badge-num">1</span></td>
-              <td><strong>1</strong></td>
-            </tr>
-            <tr>
-              <td><strong>Totaux</strong></td>
-              <td><strong>1</strong></td>
-              <td><strong>29</strong></td>
-              <td><strong>82</strong></td>
-              <td><strong style="color:var(--cyan)">112</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Chart 3 : Pyramide des âges -->
-      <div class="chart-card" style="grid-column: span 2;">
-        <div class="chart-title">👥 Pyramide des âges – Hommes & Femmes</div>
-        <canvas id="chartAges" class="chart-canvas" style="max-height:280px"></canvas>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- INFOS PRATIQUES -->
-<section id="infos">
-  <div class="container">
-    <p class="section-label">Informations pratiques</p>
-    <h2 class="section-title">Tout ce qu'il faut <span class="accent-pink">savoir</span></h2>
-    <div class="divider"></div>
-
-    <div class="infos-grid">
-      <div class="info-card">
-        <div class="info-card-icon">📍</div>
-        <div class="info-card-title">Où on joue</div>
-        <div class="info-card-text">
-          <strong>Patinoire Tony Bessi</strong><br>
-          Nice, Alpes-Maritimes (06)<br><br>
-          Une infrastructure moderne au cœur de la ville pour s'entraîner dans les meilleures conditions.
+  <!-- REJOINDRE HOCKEY -->
+  <section class="rejoindre-section">
+    <div class="container">
+      <div class="rejoindre-inner">
+        <div>
+          <p class="section-label">Viens essayer</p>
+          <h2 class="section-title">Rejoins<br><span class="accent-lime">La Meute !</span></h2>
+          <div class="divider"></div>
+          <p class="section-desc">Que tu aies 5 ou 60 ans, débutant ou expérimenté, il y a une place pour toi. Le roller hockey Nounours, c'est le sport le plus électrique de Nice.</p>
+          <div class="rejoindre-features">
+            <div class="feature-row" style="--color:var(--pink)">
+              <span class="feature-icon">🛼</span>
+              <div>
+                <div class="feature-title">Équipements prêtés</div>
+                <div class="feature-text">Pour débuter en toute sérénité. Casque, protections, patins, crosse — on a tout le matériel pour tes premières séances.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--cyan)">
+              <span class="feature-icon">😄</span>
+              <div>
+                <div class="feature-title">Entraînements ludiques</div>
+                <div class="feature-text">Progresser en s'amusant. Nos coachs adaptent les exercices à chaque niveau pour une progression rapide et fun.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--lime)">
+              <span class="feature-icon">🏅</span>
+              <div>
+                <div class="feature-title">Compétitions & tournois</div>
+                <div class="feature-text">Des défis, des émotions ! Championnats régionaux, tournois nationaux — l'adrénaline de la compétition t'attend.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--pink)">
+              <span class="feature-icon">🐻</span>
+              <div>
+                <div class="feature-title">Humains avant tout</div>
+                <div class="feature-text">Un club proche des familles. Ambiance chaleureuse et bienveillante garantie à chaque séance.</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🎂</div>
-        <div class="info-card-title">Qui peut jouer</div>
-        <div class="info-card-text">
-          <strong>Section jeunes</strong> : 5 à 17 ans<br>
-          Filles et garçons, tous niveaux<br><br>
-          <strong>Section adultes / loisir</strong><br>
-          Compétition & loisir dès 13 ans<br><br>
-          Aucune expérience nécessaire pour débuter !
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🛡️</div>
-        <div class="info-card-title">Structure</div>
-        <div class="info-card-text">
-          <strong>Association</strong> : Roller Riviera<br>
-          Affiliée à la <strong>FFRS</strong> (Fédération Française de Roller et Skateboard)<br><br>
-          <strong>112 licenciés</strong> pour la saison 2025/2026.<br>
-          Dirigeants bénévoles passionnés.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">⚡</div>
-        <div class="info-card-title">Séances découverte</div>
-        <div class="info-card-text">
-          <strong>1 à 2 séances offertes</strong> pour tester sans engagement.<br><br>
-          Équipements prêtés sur place.<br>
-          Accompagnement par nos coachs.<br><br>
-          Contacte-nous pour connaître les prochains créneaux disponibles.
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">📱</div>
-        <div class="info-card-title">Nous suivre</div>
-        <div class="info-card-text">
-          <strong>Site web :</strong> <a href="https://lesnounours.fr" target="_blank">lesnounours.fr</a><br>
-          <strong>Facebook :</strong> <a href="https://facebook.com/lesnounours.rollerhockey" target="_blank">Les Nounours Roller Hockey</a><br>
-          <strong>Instagram :</strong> <a href="https://instagram.com/lesnounours.rollerhockey" target="_blank">@lesnounours.rollerhockey</a><br><br>
-          Toutes les infos, horaires et inscriptions sur nos réseaux !
-        </div>
-      </div>
-
-      <div class="info-card">
-        <div class="info-card-icon">🏅</div>
-        <div class="info-card-title">Compétitions</div>
-        <div class="info-card-text">
-          Nous participons aux championnats et tournois organisés par la <strong>FFRS</strong>.<br><br>
-          <strong>62 licenciés</strong> en compétition cette saison.<br>
-          Formations jeunes pour les futures générations de champions.
+        <div>
+          <div class="cta-box cta-box-hockey">
+            <div class="cta-badge cta-badge-lime">⭐ OFFRE DÉCOUVERTE</div>
+            <div class="cta-big cta-big-lime">1 à 2 Séances<br>Découvertes<br>Offertes !</div>
+            <p class="cta-details">Viens tester le roller hockey sans engagement. Une ou deux séances gratuites pour tomber amoureux du sport le plus électrique de Nice.</p>
+            <div class="cta-tags">
+              <span class="tag">Fille ou Garçon</span>
+              <span class="tag">5 à 17 ans</span>
+              <span class="tag">Tous niveaux</span>
+              <span class="tag">Adultes aussi</span>
+            </div>
+            <div class="cta-location cta-location-lime">
+              <div class="cta-location-label cta-location-label-lime">📍 Où nous trouver ?</div>
+              <div class="cta-location-text"><strong style="color:var(--text)">Patinoire Tony Bessi</strong> · Nice<br>Retrouve-nous sur les réseaux pour les horaires</div>
+            </div>
+            <div style="margin-top:1.8rem">
+              <a class="btn-primary" href="#social" style="width:100%;text-align:center;">Nous contacter ⚡</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- DONNÉES -->
+  <section id="donnees">
+    <div class="container">
+      <p class="section-label">Le club en chiffres</p>
+      <h2 class="section-title">Notre <span class="accent-cyan">croissance</span></h2>
+      <div class="divider"></div>
+      <p class="section-desc">Depuis 2017, les Nounours n'ont cessé de grandir. Aujourd'hui avec 112 licenciés, on est la grande famille du roller hockey niçois.</p>
+      <div class="charts-grid">
+        <div class="chart-card" style="grid-column:span 2">
+          <div class="chart-title">📈 Évolution du nombre de licenciés (2017–2026)</div>
+          <canvas id="chartLicencies" class="chart-canvas" style="max-height:300px"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">🥇 Répartition par type de licence</div>
+          <canvas id="chartTypes" class="chart-canvas"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">📋 Détail des licences – Saison 2025/2026</div>
+          <table class="licences-table">
+            <thead><tr><th>Type</th><th>&lt;6 ans</th><th>6–12 ans</th><th>13 ans+</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>Compétition</td><td>–</td><td><span class="badge-num">5</span></td><td><span class="badge-num">57</span></td><td><strong>62</strong></td></tr>
+              <tr><td>Loisir</td><td><span class="badge-num">1</span></td><td><span class="badge-num">24</span></td><td><span class="badge-num">7</span></td><td><strong>32</strong></td></tr>
+              <tr><td>Dirigeant</td><td>–</td><td>–</td><td><span class="badge-num">8</span></td><td><strong>8</strong></td></tr>
+              <tr><td>Officiel compétition</td><td>–</td><td>–</td><td><span class="badge-num">6</span></td><td><strong>6</strong></td></tr>
+              <tr><td>Non Pratiquant</td><td>–</td><td>–</td><td><span class="badge-num">3</span></td><td><strong>3</strong></td></tr>
+              <tr><td>Encadrant sportif</td><td>–</td><td>–</td><td><span class="badge-num">1</span></td><td><strong>1</strong></td></tr>
+              <tr><td><strong>Totaux</strong></td><td><strong>1</strong></td><td><strong>29</strong></td><td><strong>82</strong></td><td><strong style="color:var(--cyan)">112</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="chart-card" style="grid-column:span 2">
+          <div class="chart-title">👥 Pyramide des âges – Hommes & Femmes</div>
+          <canvas id="chartAges" class="chart-canvas" style="max-height:280px"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS HOCKEY -->
+  <section id="infos">
+    <div class="container">
+      <p class="section-label">Informations pratiques</p>
+      <h2 class="section-title">Tout ce qu'il faut <span class="accent-pink">savoir</span></h2>
+      <div class="divider"></div>
+      <div class="infos-grid">
+        <div class="info-card">
+          <div class="info-card-icon">📍</div>
+          <div class="info-card-title">Où on joue</div>
+          <div class="info-card-text"><strong>Patinoire Tony Bessi</strong><br>Nice, Alpes-Maritimes (06)<br><br>Une infrastructure moderne au cœur de la ville pour s'entraîner dans les meilleures conditions.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🎂</div>
+          <div class="info-card-title">Qui peut jouer</div>
+          <div class="info-card-text"><strong>Section jeunes</strong> : 5 à 17 ans<br>Filles et garçons, tous niveaux<br><br><strong>Section adultes / loisir</strong><br>Compétition & loisir dès 13 ans<br><br>Aucune expérience nécessaire !</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🛡️</div>
+          <div class="info-card-title">Structure</div>
+          <div class="info-card-text"><strong>Association</strong> : Roller Riviera<br>Affiliée à la <strong>FFRS</strong><br>(Fédération Française de Roller et Skateboard)<br><br><strong>112 licenciés</strong> saison 2025/2026.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">⚡</div>
+          <div class="info-card-title">Séances découverte</div>
+          <div class="info-card-text"><strong>1 à 2 séances offertes</strong> sans engagement.<br><br>Équipements prêtés sur place.<br>Accompagnement par nos coachs.<br><br>Contacte-nous pour les prochains créneaux.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">📱</div>
+          <div class="info-card-title">Nous suivre</div>
+          <div class="info-card-text"><strong>Facebook :</strong> <a href="https://facebook.com/lesnounours.rollerhockey" target="_blank">Les Nounours Roller Hockey</a><br><strong>Instagram :</strong> <a href="https://instagram.com/lesnounours.rollerhockey" target="_blank">@lesnounours.rollerhockey</a><br><br>Toutes les infos, horaires et inscriptions sur nos réseaux !</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🏅</div>
+          <div class="info-card-title">Compétitions</div>
+          <div class="info-card-text">Nous participons aux championnats et tournois organisés par la <strong>FFRS</strong>.<br><br><strong>62 licenciés</strong> en compétition cette saison.<br>Formations jeunes pour les futures générations de champions.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /tab hockey -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  TAB 2 : ROLLER & PATINAGE                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="patinage" class="tab-panel">
+
+  <!-- INTRO PATINAGE -->
+  <section style="background:var(--dark)">
+    <div class="container">
+      <div class="patinage-hero">
+        <div>
+          <p class="section-label">Roller & Patinage</p>
+          <h2 class="section-title">Apprends à<br><span class="accent-cyan">Patiner !</span></h2>
+          <div class="divider" style="background:linear-gradient(90deg,var(--cyan),var(--lime))"></div>
+          <p class="section-desc">En parallèle du roller hockey, le club Les Nounours propose des cours d'initiation et d'apprentissage du patinage en ligne. Encadrés par des moniteurs passionnés, ces séances sont ouvertes à tous les âges et tous les niveaux, des premiers pas aux glissades assurées.</p>
+          <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+            <a class="btn-lime" href="#social">Nous contacter ⛸</a>
+            <a class="btn-outline" href="#tab-switcher" onclick="switchTab('hockey')">🏒 Voir le Roller Hockey</a>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--card); border:1px solid rgba(0,229,255,.2); border-radius:16px; padding:2.5rem; text-align:center; box-shadow:0 0 60px rgba(0,229,255,.06)">
+            <div style="font-size:5rem; margin-bottom:1rem; filter:drop-shadow(0 0 20px var(--cyan))">⛸</div>
+            <div style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; color:var(--cyan); text-shadow:0 0 20px rgba(0,229,255,.5); line-height:1.1">Du premier pas<br>à la glisse<br>assurée !</div>
+            <p style="color:var(--muted); margin-top:1rem; font-size:.95rem; line-height:1.6">Cours d'initiation, perfectionnement, patinage loisir — tous les niveaux sont les bienvenus à la Patinoire Tony Bessi.</p>
+            <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center">
+              <span class="tag">Débutants</span>
+              <span class="tag">Enfants dès 3 ans</span>
+              <span class="tag">Adultes</span>
+              <span class="tag">Tous niveaux</span>
+              <span class="tag">Loisir</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉTAPES DE PROGRESSION -->
+      <div style="margin-top:5rem">
+        <p class="section-label" style="text-align:center">Progression pédagogique</p>
+        <h3 class="section-title" style="text-align:center">Comment ça <span class="accent-cyan">marche ?</span></h3>
+        <div class="patinage-steps">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon">🦺</div>
+            <div class="step-title">Premiers pas</div>
+            <div class="step-text">Chausser les patins, tenir debout, apprendre à tomber sans se blesser. On démarre en douceur avec tout l'équipement de protection.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon">🎯</div>
+            <div class="step-title">Équilibre & Glisse</div>
+            <div class="step-text">Maîtriser son équilibre, glisser en ligne droite, s'arrêter proprement. La base de tout patineur accompli.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon">🔄</div>
+            <div class="step-title">Virages & Manœuvres</div>
+            <div class="step-text">Tourner, slalomer, accélérer et freiner. On commence à vraiment s'amuser sur la piste !</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <div class="step-icon">🚀</div>
+            <div class="step-title">Autonomie & Vitesse</div>
+            <div class="step-text">Patinage autonome et fluide. Pour les plus avancés, une passerelle naturelle vers le roller hockey.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REJOINDRE PATINAGE -->
+  <section class="rejoindre-section">
+    <div class="container">
+      <div class="rejoindre-inner">
+        <div>
+          <p class="section-label" style="color:var(--cyan)">Rejoindre</p>
+          <h2 class="section-title">Enfile tes<br><span class="accent-cyan">Patins !</span></h2>
+          <div class="divider" style="background:linear-gradient(90deg,var(--cyan),var(--lime))"></div>
+          <p class="section-desc">Une activité pour toute la famille. Les cours de patinage sont l'idéal pour commencer le roller en toute confiance — et peut-être finir sur la piste de hockey !</p>
+          <div class="rejoindre-features">
+            <div class="feature-row" style="--color:var(--cyan)">
+              <span class="feature-icon">⛸</span>
+              <div>
+                <div class="feature-title">Matériel prêté</div>
+                <div class="feature-text">Patins, casque et protections fournis. Aucun équipement nécessaire pour commencer, on s'occupe de tout.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--lime)">
+              <span class="feature-icon">👶</span>
+              <div>
+                <div class="feature-title">Dès 3 ans</div>
+                <div class="feature-text">Cours adaptés pour les tout-petits, les enfants, les ados et les adultes. Chaque groupe progresse à son rythme.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--pink)">
+              <span class="feature-icon">🎓</span>
+              <div>
+                <div class="feature-title">Moniteurs qualifiés</div>
+                <div class="feature-text">Encadrement par des bénévoles et moniteurs diplômés, dans une ambiance bienveillante et encourageante.</div>
+              </div>
+            </div>
+            <div class="feature-row" style="--color:var(--cyan)">
+              <span class="feature-icon">🏒</span>
+              <div>
+                <div class="feature-title">Passerelle vers le Hockey</div>
+                <div class="feature-text">Le patinage, c'est la porte d'entrée idéale vers le roller hockey. Les Nounours t'accompagnent jusqu'au bout !</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cta-box cta-box-patinage">
+            <div class="cta-badge cta-badge-cyan">⛸ INITIATION</div>
+            <div class="cta-big cta-big-cyan">Séances<br>Découvertes<br>Offertes !</div>
+            <p class="cta-details">Viens essayer le patinage en ligne sans engagement. Nos moniteurs t'accueillent du premier coup de patin jusqu'à la glisse autonome.</p>
+            <div class="cta-tags">
+              <span class="tag">Dès 3 ans</span>
+              <span class="tag">Adultes</span>
+              <span class="tag">Débutants</span>
+              <span class="tag">Toute la famille</span>
+            </div>
+            <div class="cta-location cta-location-cyan">
+              <div class="cta-location-label cta-location-label-cyan">📍 Où nous trouver ?</div>
+              <div class="cta-location-text"><strong style="color:var(--text)">Patinoire Tony Bessi</strong> · Nice<br>Retrouve-nous sur les réseaux pour les horaires</div>
+            </div>
+            <div style="margin-top:1.8rem">
+              <a class="btn-lime" href="#social" style="width:100%;text-align:center;display:block">Nous contacter ⚡</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO PRATIQUES PATINAGE -->
+  <section style="background:var(--card2); position:relative; overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 100%, rgba(0,229,255,.06), transparent 60%)"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <p class="section-label" style="color:var(--cyan)">Pratique</p>
+      <h2 class="section-title">Infos <span class="accent-cyan">Patinage</span></h2>
+      <div class="divider" style="background:linear-gradient(90deg,var(--cyan),var(--lime))"></div>
+      <div class="infos-grid">
+        <div class="info-card" style="border-color:rgba(0,229,255,.1)">
+          <div class="info-card-icon" style="filter:drop-shadow(0 0 8px var(--cyan))">📍</div>
+          <div class="info-card-title" style="color:var(--cyan)">Lieu</div>
+          <div class="info-card-text"><strong>Patinoire Tony Bessi</strong><br>Nice, Alpes-Maritimes (06)<br><br>La même infrastructure que le roller hockey, un lieu accueillant pour toute la famille.</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(0,229,255,.1)">
+          <div class="info-card-icon" style="filter:drop-shadow(0 0 8px var(--cyan))">👶</div>
+          <div class="info-card-title" style="color:var(--cyan)">À qui s'adresse</div>
+          <div class="info-card-text"><strong>Tout le monde !</strong><br><br>Enfants dès 3 ans, ados, adultes, seniors. Que vous soyez grands débutants ou que vous cherchiez à perfectionner votre technique.</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(0,229,255,.1)">
+          <div class="info-card-icon" style="filter:drop-shadow(0 0 8px var(--cyan))">🛡️</div>
+          <div class="info-card-title" style="color:var(--cyan)">Sécurité</div>
+          <div class="info-card-text">Tout le matériel de protection est fourni et obligatoire : casque, genouillères, coudières, protège-poignets.<br><br>On ne démarre qu'une fois bien équipé !</div>
+        </div>
+        <div class="info-card" style="border-color:rgba(0,229,255,.1)">
+          <div class="info-card-icon" style="filter:drop-shadow(0 0 8px var(--cyan))">📱</div>
+          <div class="info-card-title" style="color:var(--cyan)">S'inscrire</div>
+          <div class="info-card-text">Pour connaître les créneaux et tarifs, contacte-nous via nos réseaux sociaux :<br><br><a href="https://facebook.com/lesnounours.rollerhockey" target="_blank">Facebook</a> · <a href="https://instagram.com/lesnounours.rollerhockey" target="_blank">Instagram</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /tab patinage -->
+
+<!-- ═══════════════════════════════════════════════ -->
+<!--  SECTIONS COMMUNES                             -->
+<!-- ═══════════════════════════════════════════════ -->
 
 <!-- SOCIAL -->
 <section id="social">
   <div class="container">
     <p class="section-label">Restons connectés</p>
     <h2 class="section-title">Retrouve-nous <span class="accent-cyan">en ligne</span></h2>
-    <div class="divider" style="margin:1.2rem auto;"></div>
-    <p style="color:var(--muted); max-width:500px; margin:0 auto; text-align:center;">Suis nos aventures, résultats de matchs et événements. La meute est partout !</p>
-
+    <div class="divider" style="margin:1.2rem auto"></div>
+    <p style="color:var(--muted); max-width:500px; margin:0 auto; text-align:center">Suis nos aventures, résultats de matchs et événements. La meute est partout !</p>
     <div class="social-links">
       <a class="social-link fb" href="https://facebook.com/lesnounours.rollerhockey" target="_blank">
         <svg viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -847,28 +916,25 @@
       </a>
       <a class="social-link ig" href="https://instagram.com/lesnounours.rollerhockey" target="_blank">
         <svg viewBox="0 0 24 24" fill="url(#ig-grad)">
-          <defs>
-            <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#f09433"/>
-              <stop offset="25%" style="stop-color:#e6683c"/>
-              <stop offset="50%" style="stop-color:#dc2743"/>
-              <stop offset="75%" style="stop-color:#cc2366"/>
-              <stop offset="100%" style="stop-color:#bc1888"/>
-            </linearGradient>
-          </defs>
+          <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/>
+            <stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/>
+            <stop offset="100%" style="stop-color:#bc1888"/>
+          </linearGradient></defs>
           <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
         </svg>
         @lesnounours.rollerhockey
       </a>
     </div>
-
-    <!-- CTA FINAL -->
-    <div style="margin-top:4rem; text-align:center;">
-      <div class="neon-card" style="max-width:600px; margin:0 auto;">
-        <p class="section-label" style="text-align:center;">Prêt à rejoindre la meute ?</p>
-        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:.08em; color:var(--lime); text-shadow: 0 0 25px rgba(200,255,0,.5);">T'as l'énergie ?<br>Nous on a le team !</h3>
-        <p style="color:var(--muted); margin:1rem 0 1.5rem; line-height:1.65;">Viens vivre la passion du roller hockey avec les Nounours de Nice. 1 à 2 séances découvertes offertes, équipement prêté, ambiance garantie.</p>
-        <a class="btn-primary" href="https://lesnounours.fr" target="_blank">Découvrir le site officiel ⚡</a>
+    <div style="margin-top:4rem; text-align:center">
+      <div class="neon-card" style="max-width:600px; margin:0 auto">
+        <p class="section-label" style="text-align:center">Prêt à rejoindre la meute ?</p>
+        <h3 style="font-family:'Bebas Neue',sans-serif; font-size:2.5rem; letter-spacing:.08em; color:var(--lime); text-shadow:0 0 25px rgba(200,255,0,.5)">T'as l'énergie ?<br>Nous on a le team !</h3>
+        <p style="color:var(--muted); margin:1rem 0 1.5rem; line-height:1.65">Roller hockey ou patinage, viens vivre la passion avec les Nounours de Nice. Séances découvertes offertes, équipement prêté, ambiance garantie.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap">
+          <a class="btn-primary" href="https://facebook.com/lesnounours.rollerhockey" target="_blank">🏒 Facebook</a>
+          <a class="btn-lime" href="https://instagram.com/lesnounours.rollerhockey" target="_blank">⛸ Instagram</a>
+        </div>
       </div>
     </div>
   </div>
@@ -878,11 +944,10 @@
 <footer>
   <div class="footer-logo">
     <img src="Logo.jpg" alt="Les Nounours">
-    <span>Les Nounours – Roller Hockey</span>
+    <span>Les Nounours – Roller · Nice</span>
   </div>
   <div class="footer-text">
     Association <strong>Roller Riviera</strong> · Patinoire Tony Bessi · Nice (06)<br>
-    <a href="https://lesnounours.fr" target="_blank">lesnounours.fr</a> ·
     <a href="https://facebook.com/lesnounours.rollerhockey" target="_blank">Facebook</a> ·
     <a href="https://instagram.com/lesnounours.rollerhockey" target="_blank">Instagram</a><br><br>
     <span style="color:#555">Made with ❤️ pour les Nounours · Nice 2026</span>
@@ -890,7 +955,18 @@
 </footer>
 
 <script>
-  /* ── COUNTER ANIMATION ───────────────────────── */
+  /* ── TABS ────────────────────────────────────────── */
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.getElementById('btn-hockey').className = 'tab-btn' + (tab === 'hockey' ? ' active-hockey' : '');
+    document.getElementById('btn-patinage').className = 'tab-btn' + (tab === 'patinage' ? ' active-patinage' : '');
+    if (tab !== 'hockey') {
+      document.getElementById('tab-switcher').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* ── COUNTER ANIMATION ───────────────────────────── */
   function animateCounter(el, target, duration = 1800) {
     let start = 0, step = target / (duration / 16);
     const tick = () => {
@@ -900,155 +976,72 @@
     };
     requestAnimationFrame(tick);
   }
-
-  const observer = new IntersectionObserver(entries => {
+  const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         animateCounter(document.getElementById('counter-licencies'), 112);
         animateCounter(document.getElementById('counter-competition'), 62);
         animateCounter(document.getElementById('counter-loisir'), 32);
-        observer.disconnect();
+        obs.disconnect();
       }
     });
   }, { threshold: .3 });
-  observer.observe(document.getElementById('stats'));
+  obs.observe(document.getElementById('stats'));
 
-  /* ── CHART DEFAULTS ──────────────────────────── */
+  /* ── CHARTS ──────────────────────────────────────── */
   Chart.defaults.color = '#8888aa';
   Chart.defaults.font.family = "'Barlow Condensed', sans-serif";
   Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
 
-  /* ── CHART 1 : LICENCIÉS PAR ANNÉE ──────────── */
   new Chart(document.getElementById('chartLicencies'), {
     type: 'bar',
     data: {
       labels: ['2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'],
       datasets: [{
-        label: 'Licenciés',
-        data: [9, 62, 107, 97, 76, 93, 88, 97, 103, 112],
-        backgroundColor: (ctx) => {
-          const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 300);
-          g.addColorStop(0, 'rgba(255,31,142,0.85)');
-          g.addColorStop(1, 'rgba(0,229,255,0.4)');
-          return g;
-        },
-        borderColor: '#ff1f8e',
-        borderWidth: 1,
-        borderRadius: 6,
-        borderSkipped: false,
+        label: 'Licenciés', data: [9,62,107,97,76,93,88,97,103,112],
+        backgroundColor: (ctx) => { const g = ctx.chart.ctx.createLinearGradient(0,0,0,300); g.addColorStop(0,'rgba(255,31,142,0.85)'); g.addColorStop(1,'rgba(0,229,255,0.4)'); return g; },
+        borderColor: '#ff1f8e', borderWidth: 1, borderRadius: 6, borderSkipped: false,
       }]
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#0e0e1a',
-          borderColor: '#ff1f8e',
-          borderWidth: 1,
-          callbacks: {
-            label: (ctx) => `  ${ctx.parsed.y} licenciés`
-          }
-        }
-      },
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0e0e1a', borderColor: '#ff1f8e', borderWidth: 1, callbacks: { label: ctx => `  ${ctx.parsed.y} licenciés` } } },
       scales: {
         x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 12 } } },
-        y: {
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { font: { size: 11 } },
-          beginAtZero: true
-        }
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 11 } }, beginAtZero: true }
       },
       animation: { duration: 1200, easing: 'easeOutQuart' }
     }
   });
 
-  /* ── CHART 2 : TYPES DE LICENCES ─────────────── */
   new Chart(document.getElementById('chartTypes'), {
     type: 'doughnut',
     data: {
-      labels: ['Compétition', 'Loisir', 'Dirigeant', 'Officiel compétition', 'Non Pratiquant', 'Encadrant'],
-      datasets: [{
-        data: [62, 32, 8, 6, 3, 1],
-        backgroundColor: [
-          'rgba(255,31,142,0.85)',
-          'rgba(0,229,255,0.85)',
-          'rgba(200,255,0,0.85)',
-          'rgba(255,140,0,0.85)',
-          'rgba(180,100,255,0.85)',
-          'rgba(100,200,100,0.85)',
-        ],
-        borderColor: '#06060e',
-        borderWidth: 3,
-        hoverOffset: 8,
-      }]
+      labels: ['Compétition','Loisir','Dirigeant','Officiel compétition','Non Pratiquant','Encadrant'],
+      datasets: [{ data: [62,32,8,6,3,1], backgroundColor: ['rgba(255,31,142,0.85)','rgba(0,229,255,0.85)','rgba(200,255,0,0.85)','rgba(255,140,0,0.85)','rgba(180,100,255,0.85)','rgba(100,200,100,0.85)'], borderColor: '#06060e', borderWidth: 3, hoverOffset: 8 }]
     },
     options: {
-      responsive: true,
-      cutout: '60%',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { padding: 14, font: { size: 11 }, boxWidth: 12, boxHeight: 12 }
-        },
-        tooltip: {
-          backgroundColor: '#0e0e1a',
-          borderColor: '#ff1f8e',
-          borderWidth: 1,
-          callbacks: {
-            label: (ctx) => `  ${ctx.label} : ${ctx.parsed} licenciés`
-          }
-        }
-      },
+      responsive: true, cutout: '60%',
+      plugins: { legend: { position: 'bottom', labels: { padding: 14, font: { size: 11 }, boxWidth: 12, boxHeight: 12 } }, tooltip: { backgroundColor: '#0e0e1a', borderColor: '#ff1f8e', borderWidth: 1, callbacks: { label: ctx => `  ${ctx.label} : ${ctx.parsed} licenciés` } } },
       animation: { duration: 1200, easing: 'easeOutQuart' }
     }
   });
 
-  /* ── CHART 3 : PYRAMIDE DES ÂGES ─────────────── */
-  const ageLabels = ['5-6','7-8','9-10','11-12','13-14','15-17','18-20','21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','60+'];
   new Chart(document.getElementById('chartAges'), {
     type: 'bar',
     data: {
-      labels: ageLabels,
+      labels: ['5-6','7-8','9-10','11-12','13-14','15-17','18-20','21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','60+'],
       datasets: [
-        {
-          label: 'Femmes',
-          data: [3, 2, 3, 2, 1, 1, 0, 1, 1, 1, 3, 4, 1, 4, 1, 0],
-          backgroundColor: 'rgba(255,31,142,0.75)',
-          borderColor: '#ff1f8e',
-          borderWidth: 1,
-          borderRadius: 4,
-        },
-        {
-          label: 'Hommes',
-          data: [5, 5, 7, 4, 3, 2, 2, 2, 2, 3, 6, 5, 4, 5, 3, 2],
-          backgroundColor: 'rgba(0,229,255,0.65)',
-          borderColor: '#00e5ff',
-          borderWidth: 1,
-          borderRadius: 4,
-        }
+        { label: 'Femmes', data: [3,2,3,2,1,1,0,1,1,1,3,4,1,4,1,0], backgroundColor: 'rgba(255,31,142,0.75)', borderColor: '#ff1f8e', borderWidth: 1, borderRadius: 4 },
+        { label: 'Hommes', data: [5,5,7,4,3,2,2,2,2,3,6,5,4,5,3,2], backgroundColor: 'rgba(0,229,255,0.65)', borderColor: '#00e5ff', borderWidth: 1, borderRadius: 4 }
       ]
     },
     options: {
       responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-          labels: { padding: 16, font: { size: 12 }, boxWidth: 14, boxHeight: 14 }
-        },
-        tooltip: {
-          backgroundColor: '#0e0e1a',
-          borderColor: '#ff1f8e',
-          borderWidth: 1,
-        }
-      },
+      plugins: { legend: { position: 'top', labels: { padding: 16, font: { size: 12 }, boxWidth: 14, boxHeight: 14 } }, tooltip: { backgroundColor: '#0e0e1a', borderColor: '#ff1f8e', borderWidth: 1 } },
       scales: {
         x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 10 } } },
-        y: {
-          grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { font: { size: 11 }, stepSize: 1 },
-          beginAtZero: true
-        }
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { font: { size: 11 }, stepSize: 1 }, beginAtZero: true }
       },
       animation: { duration: 1000, easing: 'easeOutQuart' }
     }
