@@ -28,14 +28,14 @@
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
-    /* ── NAV ─────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    /* ── HEADER BAND ─────────────────────────────────── */
+    .header-band {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 101;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2.5rem;
-      background: rgba(6,6,14,.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      padding: .85rem 2.5rem;
+      background: rgba(6,6,14,.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid var(--pink);
     }
     .nav-logo { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
     .nav-logo img { height: 67px; width: 67px; object-fit: contain; filter: drop-shadow(0 0 10px var(--pink)); }
@@ -45,14 +45,6 @@
       background: linear-gradient(90deg, var(--pink), var(--cyan));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--text); text-decoration: none;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
-      font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--cyan); }
     .nav-cta {
       background: var(--pink); color: #fff; border: none; cursor: pointer;
       padding: .65rem 1.6rem; border-radius: 4px;
@@ -63,12 +55,30 @@
     }
     .nav-cta:hover { box-shadow: 0 0 30px rgba(255,31,142,.8); transform: translateY(-1px); }
 
+    /* ── NAV LINKS BAR ────────────────────────────────── */
+    nav {
+      position: fixed; top: 89px; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: .6rem 2.5rem;
+      background: rgba(10,10,20,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
     /* ── HERO ────────────────────────────────────────── */
     #hero {
       min-height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
-      padding: 8rem 2rem 5rem; text-align: center;
+      padding: 10rem 2rem 5rem; text-align: center;
     }
     .hero-bg {
       position: absolute; inset: 0;
@@ -199,7 +209,7 @@
     #tab-switcher {
       padding: 2.5rem 2rem;
       background: var(--dark);
-      position: sticky; top: 89px; z-index: 50;
+      position: sticky; top: 133px; z-index: 50;
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .tab-pills {
@@ -601,12 +611,17 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- HEADER BAND -->
+<div class="header-band">
   <a class="nav-logo" href="#hero">
     <img src="Logo.jpg" alt="Les Nounours">
     <span>Les Nounours</span>
   </a>
+  <button class="nav-cta" onclick="openModal()">Nous rejoindre</button>
+</div>
+
+<!-- NAV LINKS -->
+<nav>
   <ul class="nav-links">
     <li><a href="#tab-switcher">Roller Hockey</a></li>
     <li><a href="#tab-switcher" onclick="switchTab('patinage')">Patinage</a></li>
@@ -615,7 +630,6 @@
     <li><a href="#infos">Infos</a></li>
     <li><a href="#social">Contact</a></li>
   </ul>
-  <button class="nav-cta" onclick="openModal()">Nous rejoindre</button>
 </nav>
 
 <!-- HERO -->
