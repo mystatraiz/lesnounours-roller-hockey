@@ -440,6 +440,86 @@
     .footer-text { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .footer-text a { color: var(--cyan); text-decoration: none; }
 
+    /* ── BOUTIQUE ────────────────────────────────────── */
+    .tab-btn.active-boutique {
+      background: linear-gradient(135deg, rgba(200,255,0,.2), rgba(200,255,0,.08));
+      color: var(--lime);
+      box-shadow: 0 0 25px rgba(200,255,0,.2), inset 0 0 0 1px rgba(200,255,0,.3);
+    }
+    .shop-banner {
+      background: linear-gradient(135deg, rgba(200,255,0,.08), rgba(255,31,142,.06));
+      border: 1px solid rgba(200,255,0,.2); border-radius: 14px;
+      padding: 1.4rem 2rem; margin-bottom: 3rem;
+      display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    }
+    .shop-banner-icon { font-size: 2rem; flex-shrink: 0; }
+    .shop-banner-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+      letter-spacing: .08em; color: var(--lime);
+    }
+    .shop-banner-text { color: var(--muted); font-size: .9rem; margin-top: .1rem; }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .product-card {
+      background: var(--card); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 16px; overflow: hidden;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(200,255,0,.3);
+      box-shadow: 0 12px 40px rgba(200,255,0,.08), 0 0 0 1px rgba(200,255,0,.15);
+    }
+    .product-img {
+      width: 100%; aspect-ratio: 1/1; overflow: hidden;
+      background-image: url('merch.jpg');
+      background-size: 400% 300%;
+      background-repeat: no-repeat;
+      transition: transform .4s ease;
+    }
+    .product-card:hover .product-img { transform: scale(1.04); }
+    .product-body { padding: 1.4rem; }
+    .product-category {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: .4rem;
+    }
+    .product-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      letter-spacing: .07em; line-height: 1; color: var(--text);
+    }
+    .product-desc {
+      color: var(--muted); font-size: .85rem; line-height: 1.55;
+      margin-top: .5rem;
+    }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.1rem; padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .product-price {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .06em;
+      color: var(--pink);
+    }
+    .product-price .price-note {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .75rem;
+      font-weight: 600; letter-spacing: .1em; color: var(--muted);
+      display: block; margin-top: -.3rem; text-transform: uppercase;
+    }
+    .btn-notify {
+      background: rgba(200,255,0,.1); border: 1px solid rgba(200,255,0,.3);
+      color: var(--lime); border-radius: 8px; padding: .5rem 1rem;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: .85rem; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s, box-shadow .2s;
+      white-space: nowrap;
+    }
+    .btn-notify:hover { background: rgba(200,255,0,.2); box-shadow: 0 0 20px rgba(200,255,0,.2); }
+
     /* ── MODAL ───────────────────────────────────────── */
     .modal-overlay {
       display: none;
@@ -530,6 +610,7 @@
   <ul class="nav-links">
     <li><a href="#tab-switcher">Roller Hockey</a></li>
     <li><a href="#tab-switcher" onclick="switchTab('patinage')">Patinage</a></li>
+    <li><a href="#tab-switcher" onclick="switchTab('boutique')">Boutique</a></li>
     <li><a href="#donnees">Stats</a></li>
     <li><a href="#infos">Infos</a></li>
     <li><a href="#social">Contact</a></li>
@@ -604,6 +685,13 @@
       <span class="tab-btn-inner">
         <span>Roller & Patinage</span>
         <span class="tab-sub">Apprentissage & initiation</span>
+      </span>
+    </button>
+    <button class="tab-btn" id="btn-boutique" onclick="switchTab('boutique')">
+      <span class="tab-icon">🛍️</span>
+      <span class="tab-btn-inner">
+        <span>Boutique</span>
+        <span class="tab-sub">Merch & équipements</span>
       </span>
     </button>
   </div>
@@ -970,6 +1058,177 @@
 </div><!-- /tab patinage -->
 
 <!-- ═══════════════════════════════════════════════ -->
+<!--  TAB 3 : BOUTIQUE                              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="boutique" class="tab-panel">
+  <section style="background:var(--dark)">
+    <div class="container">
+
+      <p class="section-label" style="color:var(--lime)">Merch officiel</p>
+      <h2 class="section-title">La <span class="accent-lime">Boutique</span> Nounours</h2>
+      <div class="divider" style="background:linear-gradient(90deg,var(--lime),var(--cyan))"></div>
+
+      <!-- Bandeau vitrine -->
+      <div class="shop-banner">
+        <span class="shop-banner-icon">🚧</span>
+        <div>
+          <div class="shop-banner-title">Boutique en cours d'ouverture</div>
+          <div class="shop-banner-text">La boutique officielle arrive bientôt ! Clique sur "Me notifier" pour être alerté dès l'ouverture. Tous les articles sont aux couleurs des Nounours.</div>
+        </div>
+        <button class="btn-notify" style="margin-left:auto" onclick="openModal()">M'avertir de l'ouverture ⚡</button>
+      </div>
+
+      <div class="shop-grid">
+
+        <!-- 1. HOODIE -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:0% 0%"></div>
+          <div class="product-body">
+            <div class="product-category">Haut</div>
+            <div class="product-name">Sweat à capuche</div>
+            <div class="product-desc">Hoodie oversize aux couleurs Nounours. Logo imprimé face, éclair dans le dos. Coton premium, coupe unisexe.</div>
+            <div class="product-footer">
+              <div class="product-price">~60€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. CASQUETTE -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:33.33% 0%"></div>
+          <div class="product-body">
+            <div class="product-category">Accessoire</div>
+            <div class="product-name">Casquette Trucker</div>
+            <div class="product-desc">Casquette style trucker avec filet, broderie logo Nounours sur le devant. Réglable, taille unique.</div>
+            <div class="product-footer">
+              <div class="product-price">~35€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. BONNET -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:66.67% 0%"></div>
+          <div class="product-body">
+            <div class="product-category">Accessoire</div>
+            <div class="product-name">Bonnet Pompon</div>
+            <div class="product-desc">Bonnet tricoté avec pompon, rayures pink & lime. Logo Nounours brodé face. Chaud et stylé pour les jours de match.</div>
+            <div class="product-footer">
+              <div class="product-price">~28€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. SURVÊTEMENT -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:100% 0%"></div>
+          <div class="product-body">
+            <div class="product-category">Tenue complète</div>
+            <div class="product-name">Survêtement Nike</div>
+            <div class="product-desc">Veste zippée + pantalon assortis. Bandes lime sur les côtés, logo Nounours brodé. Tissu Dri-FIT respirant.</div>
+            <div class="product-footer">
+              <div class="product-price">~120€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. SHORT -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:0% 50%"></div>
+          <div class="product-body">
+            <div class="product-category">Bas</div>
+            <div class="product-name">Short de sport</div>
+            <div class="product-desc">Short Nike Dri-FIT avec bandes latérales lime. Coupe légère, idéal pour l'entraînement et les matchs. Élastique réglable.</div>
+            <div class="product-footer">
+              <div class="product-price">~40€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. T-SHIRT -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:33.33% 50%"></div>
+          <div class="product-body">
+            <div class="product-category">Haut</div>
+            <div class="product-name">T-shirt Dri-FIT</div>
+            <div class="product-desc">T-shirt Nike technique, tissu respirant Dri-FIT. Logo Nounours sérigraphié face. Coupe regular, disponible en plusieurs tailles.</div>
+            <div class="product-footer">
+              <div class="product-price">~35€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. BOXER -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:66.67% 50%"></div>
+          <div class="product-body">
+            <div class="product-category">Sous-vêtement</div>
+            <div class="product-name">Boxer Nounours</div>
+            <div class="product-desc">Boxer avec élastique siglé "NOUNOURS ⚡". Logo imprimé sur le devant. 95% coton, ceinture ton sur ton pink.</div>
+            <div class="product-footer">
+              <div class="product-price">~22€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. JOGGING -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:100% 50%"></div>
+          <div class="product-body">
+            <div class="product-category">Bas</div>
+            <div class="product-name">Jogging Nike</div>
+            <div class="product-desc">Pantalon de survêtement coupe slim, bandes lime, logo Nounours brodé à la cuisse. Parfait pour l'échauffement ou le quotidien.</div>
+            <div class="product-footer">
+              <div class="product-price">~65€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. CHAUSSETTES -->
+        <div class="product-card" onclick="openModal()">
+          <div class="product-img" style="background-position:0% 100%"></div>
+          <div class="product-body">
+            <div class="product-category">Accessoire</div>
+            <div class="product-name">Chaussettes</div>
+            <div class="product-desc">Pack de chaussettes Dri-FIT mi-mollet. Logo Nounours brodé, rayures pink & lime. Vendu par paire. Tailles 35–46.</div>
+            <div class="product-footer">
+              <div class="product-price">~18€ <span class="price-note">Prix indicatif</span></div>
+              <button class="btn-notify">Me notifier</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. MAILLOT OFFICIEL -->
+        <div class="product-card" onclick="openModal()" style="grid-column: span 2">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0">
+            <div class="product-img" style="background-position:33.33% 100%; border-radius:0"></div>
+            <div class="product-img" style="background-position:66.67% 100%; border-radius:0"></div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">Maillot officiel ⭐</div>
+            <div class="product-name">Maillot de Compétition</div>
+            <div class="product-desc">Le maillot officiel des Nounours. Tissu technique Nike Dri-FIT, impression sublimation full-color. Numéro et nom au dos personnalisables. Rayures pink & lime sur les manches et bas de maillot. Maillot porté en championnat FFRS.</div>
+            <div class="product-footer">
+              <div class="product-price">~85€ <span class="price-note">Prix indicatif – personnalisable</span></div>
+              <button class="btn-notify" style="background:rgba(255,31,142,.15); border-color:rgba(255,31,142,.4); color:var(--pink)">Commander ⚡</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /shop-grid -->
+    </div>
+  </section>
+</div><!-- /tab boutique -->
+
+<!-- ═══════════════════════════════════════════════ -->
 <!--  SECTIONS COMMUNES                             -->
 <!-- ═══════════════════════════════════════════════ -->
 
@@ -1107,8 +1366,9 @@
   function switchTab(tab) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.getElementById(tab).classList.add('active');
-    document.getElementById('btn-hockey').className = 'tab-btn' + (tab === 'hockey' ? ' active-hockey' : '');
+    document.getElementById('btn-hockey').className   = 'tab-btn' + (tab === 'hockey'   ? ' active-hockey'   : '');
     document.getElementById('btn-patinage').className = 'tab-btn' + (tab === 'patinage' ? ' active-patinage' : '');
+    document.getElementById('btn-boutique').className = 'tab-btn' + (tab === 'boutique' ? ' active-boutique' : '');
     if (tab !== 'hockey') {
       document.getElementById('tab-switcher').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
