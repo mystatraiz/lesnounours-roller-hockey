@@ -451,6 +451,50 @@
     .footer-text { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .footer-text a { color: var(--cyan); text-decoration: none; }
 
+    /* ── ADHÉRER ─────────────────────────────────────── */
+    .tab-btn.active-adherer {
+      background: linear-gradient(135deg, rgba(187,17,0,.25), rgba(187,17,0,.1));
+      color: #ff6644;
+      box-shadow: 0 0 25px rgba(187,17,0,.25), inset 0 0 0 1px rgba(187,17,0,.4);
+    }
+    .adhesion-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: start; margin-top: 3rem;
+    }
+    @media (max-width: 900px) { .adhesion-grid { grid-template-columns: 1fr; } }
+    .adhesion-steps { display: flex; flex-direction: column; gap: 1.2rem; }
+    .adhesion-step {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      background: var(--card); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 12px; padding: 1.2rem 1.4rem;
+      border-left: 3px solid var(--pink);
+    }
+    .adhesion-step-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1;
+      color: var(--pink); opacity: .5; flex-shrink: 0; width: 2rem; text-align: center;
+    }
+    .adhesion-step-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; }
+    .adhesion-step-text { color: var(--muted); font-size: .88rem; line-height: 1.5; margin-top: .2rem; }
+    .tarifs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .tarif-card {
+      background: var(--card); border: 1px solid rgba(201,168,76,.2);
+      border-radius: 12px; padding: 1.4rem; text-align: center;
+      transition: transform .2s, border-color .2s;
+    }
+    .tarif-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,.5); }
+    .tarif-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .tarif-price { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--pink); line-height: 1.1; margin-top: .3rem; }
+    .tarif-note { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+    .ha-widget-wrap {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.4);
+    }
+    .ha-widget-wrap iframe { display: block; width: 100%; border: none; }
+    .ha-fallback {
+      text-align: center; padding: 2rem;
+      background: var(--card); border-radius: 12px; border: 1px solid rgba(201,168,76,.2);
+    }
+
     /* ── BOUTIQUE ────────────────────────────────────── */
     .tab-btn.active-boutique {
       background: linear-gradient(135deg, rgba(232,184,75,.2), rgba(232,184,75,.08));
@@ -627,6 +671,7 @@
     <li><a href="#tab-switcher">Roller Hockey</a></li>
     <li><a href="#tab-switcher" onclick="switchTab('patinage')">Patinage</a></li>
     <li><a href="#tab-switcher" onclick="switchTab('boutique')">Boutique</a></li>
+    <li><a href="#tab-switcher" onclick="switchTab('adherer')">Adhérer</a></li>
     <li><a href="#donnees">Stats</a></li>
     <li><a href="#infos">Infos</a></li>
     <li><a href="#social">Contact</a></li>
@@ -707,6 +752,13 @@
       <span class="tab-btn-inner">
         <span>Boutique</span>
         <span class="tab-sub">Merch & équipements</span>
+      </span>
+    </button>
+    <button class="tab-btn" id="btn-adherer" onclick="switchTab('adherer')">
+      <span class="tab-icon">✍️</span>
+      <span class="tab-btn-inner">
+        <span>Adhérer</span>
+        <span class="tab-sub">Saison 2026–2027</span>
       </span>
     </button>
   </div>
@@ -1244,6 +1296,99 @@
 </div><!-- /tab boutique -->
 
 <!-- ═══════════════════════════════════════════════ -->
+<!--  TAB 4 : ADHÉRER                               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="adherer" class="tab-panel">
+  <section style="background:var(--dark)">
+    <div class="container">
+
+      <p class="section-label" style="color:#ff6644">Rejoins le club</p>
+      <h2 class="section-title">Adhésion <span style="color:var(--pink)">2026–2027</span></h2>
+      <div class="divider" style="background:linear-gradient(90deg,var(--pink),#ff6644)"></div>
+      <p class="section-desc">L'adhésion se fait en ligne via HelloAsso, notre partenaire de gestion associative. Choisis ta formule, remplis le formulaire et tu es Nounours !</p>
+
+      <div class="adhesion-grid">
+
+        <!-- Colonne gauche : infos -->
+        <div>
+          <p class="section-label" style="margin-top:0">Comment ça marche</p>
+          <div class="adhesion-steps">
+            <div class="adhesion-step">
+              <div class="adhesion-step-num">1</div>
+              <div>
+                <div class="adhesion-step-title">Choisis ta section</div>
+                <div class="adhesion-step-text">Roller Hockey (compétition ou loisir) ou Roller & Patinage — ou les deux !</div>
+              </div>
+            </div>
+            <div class="adhesion-step">
+              <div class="adhesion-step-num">2</div>
+              <div>
+                <div class="adhesion-step-title">Remplis le formulaire</div>
+                <div class="adhesion-step-text">Tes coordonnées, niveau, certificat médical si nécessaire. Tout se fait en ligne.</div>
+              </div>
+            </div>
+            <div class="adhesion-step">
+              <div class="adhesion-step-num">3</div>
+              <div>
+                <div class="adhesion-step-title">Règle ta cotisation</div>
+                <div class="adhesion-step-text">Paiement sécurisé par carte via HelloAsso. Reçu automatique envoyé par e-mail.</div>
+              </div>
+            </div>
+            <div class="adhesion-step">
+              <div class="adhesion-step-num">4</div>
+              <div>
+                <div class="adhesion-step-title">Viens t'entraîner !</div>
+                <div class="adhesion-step-text">Patinoire Tony Bessi, Nice. Ton encadrant te contacte pour les horaires et premiers entraînements.</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="section-label" style="margin-top:2.5rem">Tarifs indicatifs</p>
+          <div class="tarifs-grid">
+            <div class="tarif-card">
+              <div class="tarif-label">Enfant</div>
+              <div class="tarif-price">~80€</div>
+              <div class="tarif-note">Jusqu'à 17 ans</div>
+            </div>
+            <div class="tarif-card">
+              <div class="tarif-label">Adulte</div>
+              <div class="tarif-price">~120€</div>
+              <div class="tarif-note">18 ans et +</div>
+            </div>
+            <div class="tarif-card">
+              <div class="tarif-label">Famille</div>
+              <div class="tarif-price">~200€</div>
+              <div class="tarif-note">2 membres +</div>
+            </div>
+          </div>
+          <p style="color:var(--muted);font-size:.8rem;margin-top:.8rem">* Tarifs indicatifs. Les montants exacts sont affichés dans le formulaire HelloAsso.</p>
+        </div>
+
+        <!-- Colonne droite : widget HelloAsso -->
+        <div>
+          <p class="section-label" style="margin-top:0">Formulaire d'adhésion</p>
+          <div class="ha-widget-wrap">
+            <iframe
+              src="https://www.helloasso.com/associations/roller-riviera/adhesions/adhesion-saison-2026-2027-nice-roller-riviera/widget/v5"
+              height="750"
+              scrolling="auto"
+              title="Adhésion Nounours 2026-2027"
+            ></iframe>
+          </div>
+          <div class="ha-fallback" style="margin-top:1rem">
+            <p style="color:var(--muted);font-size:.88rem;margin-bottom:1rem">Le formulaire ne s'affiche pas ?</p>
+            <a class="btn-primary" href="https://www.helloasso.com/associations/roller-riviera/adhesions/adhesion-saison-2026-2027-nice-roller-riviera" target="_blank" rel="noopener">
+              Ouvrir sur HelloAsso ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div><!-- /tab adherer -->
+
+<!-- ═══════════════════════════════════════════════ -->
 <!--  SECTIONS COMMUNES                             -->
 <!-- ═══════════════════════════════════════════════ -->
 
@@ -1384,6 +1529,7 @@
     document.getElementById('btn-hockey').className   = 'tab-btn' + (tab === 'hockey'   ? ' active-hockey'   : '');
     document.getElementById('btn-patinage').className = 'tab-btn' + (tab === 'patinage' ? ' active-patinage' : '');
     document.getElementById('btn-boutique').className = 'tab-btn' + (tab === 'boutique' ? ' active-boutique' : '');
+    document.getElementById('btn-adherer').className  = 'tab-btn' + (tab === 'adherer'  ? ' active-adherer'  : '');
     if (tab !== 'hockey') {
       document.getElementById('tab-switcher').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
