@@ -451,6 +451,38 @@
     .footer-text { color: var(--muted); font-size: .85rem; line-height: 1.6; }
     .footer-text a { color: var(--cyan); text-decoration: none; }
 
+    /* ── PLANNING ───────────────────────────────────── */
+    .planning-section { background: var(--card2); }
+    .planning-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.5rem; }
+    @media (max-width: 700px) { .planning-grid { grid-template-columns: 1fr; } }
+    .planning-day {
+      background: var(--card); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; overflow: hidden;
+    }
+    .planning-day-header {
+      padding: .75rem 1.2rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .1em;
+      background: linear-gradient(135deg, rgba(201,168,76,.2), rgba(201,168,76,.06));
+      border-bottom: 1px solid rgba(201,168,76,.2);
+      color: var(--pink);
+    }
+    .planning-day-note { font-family: 'Barlow Condensed', sans-serif; font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: block; margin-top: .1rem; }
+    .planning-slot { padding: .85rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,.04); display: flex; flex-direction: column; gap: .15rem; }
+    .planning-slot:last-child { border-bottom: none; }
+    .planning-time { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .95rem; letter-spacing: .05em; color: var(--pink); }
+    .planning-group { font-size: .88rem; color: var(--text); }
+    .planning-level { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .1rem .5rem; border-radius: 4px; margin-top: .2rem; }
+    .level-jeunesse { background: rgba(232,184,75,.15); color: var(--lime); }
+    .level-loisir { background: rgba(201,168,76,.15); color: var(--pink); }
+    .level-competition { background: rgba(187,17,0,.15); color: #ff6644; }
+    .level-ecole { background: rgba(187,17,0,.15); color: #ff6644; }
+    .planning-alert {
+      background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.25);
+      border-radius: 10px; padding: .9rem 1.2rem; margin-bottom: 2rem;
+      font-size: .9rem; color: var(--text); line-height: 1.5;
+    }
+    .planning-alert strong { color: var(--pink); }
+
     /* ── ADHÉRER ─────────────────────────────────────── */
     .tab-btn.active-adherer {
       background: linear-gradient(135deg, rgba(187,17,0,.25), rgba(187,17,0,.1));
@@ -864,13 +896,86 @@
             </div>
             <div class="cta-location cta-location-lime">
               <div class="cta-location-label cta-location-label-lime">📍 Où nous trouver ?</div>
-              <div class="cta-location-text"><strong style="color:var(--text)">Patinoire Tony Bessi</strong> · Nice<br>Retrouve-nous sur les réseaux pour les horaires</div>
+              <div class="cta-location-text">
+                <strong style="color:var(--text)">Mardi / Jeudi / Vendredi</strong><br>
+                Salle Magnan – Patinoire Tony Bessi, Nice<br>
+                <span style="color:var(--pink);font-size:.82rem">Roller hockey dès le 1er septembre</span>
+              </div>
             </div>
             <div style="margin-top:1.8rem">
               <a class="btn-primary" href="#social" style="width:100%;text-align:center;">Nous contacter ⚡</a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANNING HOCKEY -->
+  <section class="planning-section">
+    <div class="container">
+      <p class="section-label">Saison 2026–2027</p>
+      <h2 class="section-title">Horaires <span class="accent-pink">d'entraînement</span></h2>
+      <div class="divider"></div>
+      <div class="planning-alert">
+        📍 <strong>Salle Magnan – Patinoire Tony Bessi</strong>, Nice &nbsp;·&nbsp;
+        Roller hockey dès le <strong>1er septembre</strong> &nbsp;·&nbsp;
+        <strong>1ère séance découverte gratuite</strong> sans engagement
+      </div>
+      <div class="planning-grid">
+
+        <div class="planning-day">
+          <div class="planning-day-header">Mardi<span class="planning-day-note">à partir du 1er sept.</span></div>
+          <div class="planning-slot">
+            <span class="planning-time">18h00 – 19h15</span>
+            <span class="planning-group">Roller Hockey Jeunesse</span>
+            <span class="planning-level level-jeunesse">Jeunes</span>
+          </div>
+          <div class="planning-slot">
+            <span class="planning-time">19h15 – 20h45</span>
+            <span class="planning-group">Roller Hockey Pré-Nat Nice Monaco</span>
+            <span class="planning-level level-competition">Compétition</span>
+          </div>
+          <div class="planning-slot">
+            <span class="planning-time">20h45 – 22h00</span>
+            <span class="planning-group">Roller Hockey N3 Nice</span>
+            <span class="planning-level level-competition">Compétition</span>
+          </div>
+        </div>
+
+        <div class="planning-day">
+          <div class="planning-day-header">Jeudi<span class="planning-day-note">à partir du 1er sept.</span></div>
+          <div class="planning-slot">
+            <span class="planning-time">18h00 – 19h15</span>
+            <span class="planning-group">Roller Hockey Jeunesse</span>
+            <span class="planning-level level-jeunesse">Jeunes</span>
+          </div>
+          <div class="planning-slot">
+            <span class="planning-time">19h15 – 20h45</span>
+            <span class="planning-group">Roller Hockey N3 Nice</span>
+            <span class="planning-level level-competition">Compétition</span>
+          </div>
+          <div class="planning-slot">
+            <span class="planning-time">20h45 – 22h00</span>
+            <span class="planning-group">Roller Hockey Pré-Nat Nice Monaco</span>
+            <span class="planning-level level-competition">Compétition</span>
+          </div>
+        </div>
+
+        <div class="planning-day">
+          <div class="planning-day-header">Vendredi<span class="planning-day-note">à partir du 1er sept.</span></div>
+          <div class="planning-slot">
+            <span class="planning-time">19h30 – 20h45</span>
+            <span class="planning-group">Roller Hockey Loisir / Région Nice</span>
+            <span class="planning-level level-loisir">Loisir</span>
+          </div>
+          <div class="planning-slot">
+            <span class="planning-time">20h45 – 22h00</span>
+            <span class="planning-group">Roller Hockey N3 Monaco</span>
+            <span class="planning-level level-competition">Compétition</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1078,8 +1183,12 @@
               <span class="tag">Toute la famille</span>
             </div>
             <div class="cta-location cta-location-cyan">
-              <div class="cta-location-label cta-location-label-cyan">📍 Où nous trouver ?</div>
-              <div class="cta-location-text"><strong style="color:var(--text)">Patinoire Tony Bessi</strong> · Nice<br>Retrouve-nous sur les réseaux pour les horaires</div>
+              <div class="cta-location-label cta-location-label-cyan">📅 Horaires – École de Roller</div>
+              <div class="cta-location-text">
+                <strong style="color:var(--text)">Vendredi · 18h00 – 19h30</strong><br>
+                Salle Magnan – Patinoire Tony Bessi, Nice<br>
+                <span style="color:var(--pink);font-size:.82rem">À partir du vendredi 11 septembre</span>
+              </div>
             </div>
             <div style="margin-top:1.8rem">
               <a class="btn-lime" href="#social" style="width:100%;text-align:center;display:block">Nous contacter ⚡</a>
