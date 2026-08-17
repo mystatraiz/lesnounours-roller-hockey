@@ -1363,25 +1363,25 @@
     <h2 class="modal-title">Rejoins<br><span class="accent-lime">La Meute !</span></h2>
     <p class="modal-sub">Une question ? Tu veux essayer ? Envoie-nous un message, on revient vers toi rapidement.</p>
 
-    <form class="contact-form" onsubmit="submitForm(event)">
+    <form class="contact-form" id="contact-form" onsubmit="submitForm(event)">
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Prénom & Nom</label>
-          <input class="form-input" type="text" placeholder="Jean Dupont" required>
+          <input class="form-input" type="text" name="nom" placeholder="Jean Dupont" required>
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="jean@email.com" required>
+          <input class="form-input" type="email" name="email" placeholder="jean@email.com" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Téléphone</label>
-          <input class="form-input" type="tel" placeholder="06 00 00 00 00">
+          <input class="form-input" type="tel" name="telephone" placeholder="06 00 00 00 00">
         </div>
         <div class="form-group">
           <label class="form-label">Je m'intéresse à</label>
-          <select class="form-input form-select">
+          <select class="form-input form-select" name="section">
             <option value="">Choisir...</option>
             <option>🏒 Roller Hockey – Compétition</option>
             <option>🏒 Roller Hockey – Loisir</option>
@@ -1393,11 +1393,11 @@
       </div>
       <div class="form-group">
         <label class="form-label">Âge / pour qui ?</label>
-        <input class="form-input" type="text" placeholder="Ex : pour mon enfant de 8 ans, ou pour moi (32 ans)">
+        <input class="form-input" type="text" name="age" placeholder="Ex : pour mon enfant de 8 ans, ou pour moi (32 ans)">
       </div>
       <div class="form-group">
         <label class="form-label">Message</label>
-        <textarea class="form-input form-textarea" placeholder="Dis-nous en plus : niveau, disponibilités, questions..." rows="4"></textarea>
+        <textarea class="form-input form-textarea" name="message" placeholder="Dis-nous en plus : niveau, disponibilités, questions..." rows="4"></textarea>
       </div>
       <button type="submit" class="btn-primary" style="width:100%;text-align:center;font-size:1.2rem;margin-top:.5rem">
         Envoyer mon message ⚡
@@ -1449,10 +1449,31 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
-    document.querySelector('.contact-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
+    const form = document.getElementById('contact-form');
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours…';
+    try {
+      const res = await fetch('https://formspree.io/f/xnpagwov', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Envoyer mon message ⚡';
+        alert('Une erreur est survenue, réessaie ou contacte-nous directement.');
+      }
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer mon message ⚡';
+      alert('Erreur réseau, vérifie ta connexion et réessaie.');
+    }
   }
 
   /* ── TABS ────────────────────────────────────────── */
